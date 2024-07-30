@@ -9,34 +9,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
-    private final ClientService clientService;
+    private final Client1Service client1Service;
+    private final Client2Service client2Service;
 
-    public TestController(ClientService clientService) {
-        this.clientService = clientService;
+    public TestController(Client1Service client1Service, Client2Service client2Service) {
+        this.client1Service = client1Service;
+        this.client2Service = client2Service;
     }
 
     @PostMapping(path = "/test")
     public String testPost() {
-        return clientService.testPost();
+        return client1Service.testPost() + " " + client2Service.testPost();
     }
 
     @GetMapping(path = "/test")
     public String testGet() {
-        return clientService.testGet();
+        return client1Service.testGet() + " " + client2Service.testGet();
     }
 
     @PutMapping(path = "/test")
     public String testPut() {
-        return clientService.testPut();
+        return client1Service.testPut() + " " + client2Service.testPut();
     }
 
     @PatchMapping(path = "/test")
     public String testPatch() {
-        return clientService.testPatch();
+        return client1Service.testPatch() + " " + client2Service.testPatch();
     }
 
     @DeleteMapping(path = "/test")
     public String testDelete() {
-        return clientService.testDelete();
+        return client1Service.testDelete() + " " + client2Service.testDelete();
     }
 }

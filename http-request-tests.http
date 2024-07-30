@@ -1,0 +1,24 @@
+### Post Test
+// @no-log
+// @no-cookie-jar
+POST http://localhost:8080/test
+
+### Get Test
+// @no-log
+// @no-cookie-jar
+GET http://localhost:8080/test
+
+### Put Test
+// @no-log
+// @no-cookie-jar
+PUT http://localhost:8080/test
+
+### Patch Test
+// @no-log
+// @no-cookie-jar
+PATCH http://localhost:8080/test
+
+### Delete Test
+// @no-log
+// @no-cookie-jar
+DELETE http://localhost:8080/test

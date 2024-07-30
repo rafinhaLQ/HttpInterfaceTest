@@ -7,8 +7,8 @@ import org.springframework.web.service.annotation.PatchExchange;
 import org.springframework.web.service.annotation.PostExchange;
 import org.springframework.web.service.annotation.PutExchange;
 
-@HttpExchange(value = "http://localhost:8080/mock")
-public interface ClientService {
+@HttpExchange(value = "http://localhost:8080/mock2")
+public interface Client2Service {
     @PostExchange
     String testPost();
 

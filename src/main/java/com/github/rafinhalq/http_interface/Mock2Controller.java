@@ -8,29 +8,29 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MockController {
-    @PostMapping(path = "/mock")
+public class Mock2Controller {
+    @PostMapping(path = "/mock2")
     public String testPost() {
-        return "Created!";
+        return "Mock 2 - Created!";
     }
 
-    @GetMapping(path = "/mock")
+    @GetMapping(path = "/mock2")
     public String testGet() {
-        return "Hello World!";
+        return "Mock 2 - Hello World!";
     }
 
-    @PutMapping(path = "/mock")
+    @PutMapping(path = "/mock2")
     public String testPut() {
-        return "Updated!";
+        return "Mock 2 - Updated!";
     }
 
-    @PatchMapping(path = "/mock")
+    @PatchMapping(path = "/mock2")
     public String testPatch() {
-        return "Patched!";
+        return "Mock 2 - Patched!";
     }
 
-    @DeleteMapping(path = "/mock")
+    @DeleteMapping(path = "/mock2")
     public String testDelete() {
-        return "Deleted!";
+        return "Mock 2 - Deleted!";
     }
 }
