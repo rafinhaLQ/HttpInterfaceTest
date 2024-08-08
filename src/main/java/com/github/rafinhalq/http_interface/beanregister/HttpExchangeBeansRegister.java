@@ -1,11 +1,8 @@
-package com.github.rafinhalq.http_interface.annotation;
+package com.github.rafinhalq.http_interface.beanregister;
 
-import io.netty.handler.ssl.SslContext;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import com.github.rafinhalq.http_interface.scan.HttpExchangeScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
@@ -15,9 +12,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpExchangeAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
-import reactor.netty.http.client.HttpClient;
-
-import javax.net.ssl.SSLException;
 
 public class HttpExchangeBeansRegister implements ImportBeanDefinitionRegistrar {
 
@@ -39,23 +33,17 @@ public class HttpExchangeBeansRegister implements ImportBeanDefinitionRegistrar 
 
             var beanDefinition = new GenericBeanDefinition();
             beanDefinition.setBeanClass(httpInterfaceClass);
-            beanDefinition.setInstanceSupplier(() -> {
-                try {
-                    return createClient(httpInterfaceClass);
-                } catch (SSLException e) {
-                    throw new BeanCreationException("Error creating client for interface: " + httpInterfaceClass.getName(), e);
-                }
-            });
+            beanDefinition.setInstanceSupplier(() -> createClient(httpInterfaceClass));
 
             var beanName = standardizeBeanName(httpInterfaceClass.getSimpleName());
 
             registry.registerBeanDefinition(beanName, beanDefinition);
 
-            log.debug("Registered bean {} for interface: {}", beanName, httpInterfaceClass.getName());
+            log.debug("Registered bean: {}", beanName);
         }
     }
 
-    private <T> T createClient(Class<T> clientClass) throws SSLException {
+    private <T> T createClient(Class<T> clientClass) {
         HttpServiceProxyFactory factory = HttpServiceProxyFactory
             .builder()
             .exchangeAdapter(createAdapter())
@@ -64,15 +52,9 @@ public class HttpExchangeBeansRegister implements ImportBeanDefinitionRegistrar 
         return factory.createClient(clientClass);
     }
 
-    private HttpExchangeAdapter createAdapter() throws SSLException {
-        SslContext ssl = SslContextBuilder.forClient()
-            .trustManager(InsecureTrustManagerFactory.INSTANCE)
-            .build();
-
-        var httpClient = HttpClient.create().secure(t -> t.sslContext(ssl));
-
+    private HttpExchangeAdapter createAdapter() {
         var client = WebClient.builder()
-            .clientConnector(new ReactorClientHttpConnector(httpClient))
+            .clientConnector(new ReactorClientHttpConnector())
             .build();
 
         return WebClientAdapter.create(client);

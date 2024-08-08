@@ -1,4 +1,4 @@
-package com.github.rafinhalq.http_interface.annotation;
+package com.github.rafinhalq.http_interface.beanregister;
 
 import org.springframework.context.annotation.Import;
 
@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Import(HttpExchangeBeansRegister.class)
-public @interface EnableHttpExchangeBeans {}
+public @interface EnableHttpExchangeBeans {
+}

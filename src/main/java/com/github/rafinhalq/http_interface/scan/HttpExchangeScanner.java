@@ -1,4 +1,4 @@
-package com.github.rafinhalq.http_interface.annotation;
+package com.github.rafinhalq.http_interface.scan;
 
 import org.reflections.Reflections;
 import org.reflections.scanners.Scanners;
@@ -15,11 +15,11 @@ public class HttpExchangeScanner {
     }
 
     public static List<Class<?>> findHttpExchangeInterfaces(String basePackage) {
-        Reflections reflections = new Reflections(new ConfigurationBuilder()
+        Reflections projectReflected = new Reflections(new ConfigurationBuilder()
             .forPackage(basePackage)
             .addScanners(Scanners.TypesAnnotated));
 
-        Set<Class<?>> annotatedClasses = reflections.getTypesAnnotatedWith(HttpExchange.class);
+        Set<Class<?>> annotatedClasses = projectReflected.getTypesAnnotatedWith(HttpExchange.class);
         List<Class<?>> httpExchangeInterfaces = new ArrayList<>();
 
         for (Class<?> clazz : annotatedClasses) {
