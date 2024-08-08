@@ -13,30 +13,30 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 
 @RestController
-public class Mock2Controller {
-    @PostMapping(path = "/mock2")
+public class MockController1 {
+    @PostMapping(path = "/mock1")
     public ResponseEntity<Product> testPost() {
         return ResponseEntity.status(HttpStatus.CREATED)
-            .body(new Product("Product 2", "Description 2", new BigDecimal("100.00")));
+            .body(new Product("Product 1", "Description 1", new BigDecimal("100.00")));
     }
 
-    @GetMapping(path = "/mock2")
+    @GetMapping(path = "/mock1")
     public ResponseEntity<Product> testGet() {
-        return ResponseEntity.ok(new Product("Product 2", "Description 2", new BigDecimal("100.00")));
+        return ResponseEntity.ok(new Product("Product 1", "Description 1", new BigDecimal("100.00")));
     }
 
-    @PutMapping(path = "/mock2")
+    @PutMapping(path = "/mock1")
     public ResponseEntity<Product> testPut() {
-        return ResponseEntity.ok(new Product("Product 2", "Description 2", new BigDecimal("100.00")));
+        return ResponseEntity.ok(new Product("Product 1", "Description 1", new BigDecimal("100.00")));
     }
 
-    @PatchMapping(path = "/mock2")
+    @PatchMapping(path = "/mock1")
     public ResponseEntity<Product> testPatch() {
-        return ResponseEntity.ok(new Product("Product 2", "Description 2", new BigDecimal("100.00")));
+        return ResponseEntity.ok(new Product("Product 1", "Description 1", new BigDecimal("100.00")));
     }
 
-    @DeleteMapping(path = "/mock2")
+    @DeleteMapping(path = "/mock1")
     public ResponseEntity<Product> testDelete() {
-        return ResponseEntity.ok(new Product("Product 2", "Description 2", new BigDecimal("100.00")));
+        return ResponseEntity.ok(new Product("Product 1", "Description 1", new BigDecimal("100.00")));
     }
 }
